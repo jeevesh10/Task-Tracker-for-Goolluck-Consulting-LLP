@@ -1,18 +1,53 @@
 # Task Tracker Dashboard
 
-A full-stack Task Tracker application built using **React + TypeScript**, **Node.js + Express**, **PostgreSQL**, **Prisma ORM**, and **Docker**.
+A full-stack **Task Tracker Dashboard** built with **React, TypeScript, Node.js, Express, Prisma, PostgreSQL**, and deployed using **Vercel**, **Render**, and **Neon**.
 
 ---
 
-## Tech Stack
+# 🌐 Live Demo
 
-### Frontend
+### Frontend (Vercel)
+
+https://task-tracker-for-goolluck-consultin.vercel.app
+
+### Backend API (Render)
+
+https://task-tracker-for-goolluck-consulting-llp.onrender.com
+
+### Health Check
+
+https://task-tracker-for-goolluck-consulting-llp.onrender.com/health
+
+---
+
+# Demo Credentials
+
+Password for all users:
+
+```text
+password123
+```
+
+| Role | Email |
+|------|-------|
+| Admin | admin@example.com |
+| Manager | manager@example.com |
+| Member | member@example.com |
+| Member 2 | member2@example.com |
+
+---
+
+# Tech Stack
+
+## Frontend
+
 - React
 - TypeScript
 - Vite
 - Tailwind CSS
 
-### Backend
+## Backend
+
 - Node.js
 - Express
 - TypeScript
@@ -20,19 +55,38 @@ A full-stack Task Tracker application built using **React + TypeScript**, **Node
 - JWT Authentication
 - bcrypt
 
-### Database
-- PostgreSQL
+## Database
 
-### Containerization
-- Docker
-- Docker Compose
+- PostgreSQL (Neon)
+
+## Deployment
+
+- Vercel (Frontend)
+- Render (Backend)
+- Neon (PostgreSQL)
+
+---
+
+# Features
+
+- JWT Authentication
+- Role-Based Access Control
+- Task Management
+- Task Assignment
+- Task Status Tracking
+- Comments
+- User Management
+- Dashboard Analytics
+- Responsive Design
+- REST APIs
+- Docker Support
 
 ---
 
 # Project Structure
 
 ```
-task-dashboard/
+Task-Tracker/
 │
 ├── frontend/
 ├── backend/
@@ -42,51 +96,25 @@ task-dashboard/
 
 ---
 
-# Prerequisites
+# Running the Project Using Docker
 
-Before running the project, install:
+## Prerequisites
 
 - Docker Desktop
-- Node.js (v20 or above)
-- PostgreSQL (required only if running without Docker)
 
----
-
-# Running the Project Using Docker (Recommended)
-
-## 1. Clone the Repository
+### Clone Repository
 
 ```bash
-git clone <repository-url>
-cd task-dashboard
+git clone https://github.com/jeevesh10/Task-Tracker-for-Goolluck-Consulting-LLP.git
+
+cd Task-Tracker-for-Goolluck-Consulting-LLP
 ```
 
-## 2. Start Docker Desktop
-
-Ensure Docker Desktop is running.
-
-Verify Docker installation:
-
-```bash
-docker --version
-docker compose version
-```
-
-## 3. Build and Run Containers
+### Build and Run
 
 ```bash
 docker compose up --build
 ```
-
-This command will:
-
-- Build the frontend
-- Build the backend
-- Start PostgreSQL
-- Create Docker network
-- Start all containers
-
-## 4. Open the Application
 
 Frontend
 
@@ -94,116 +122,96 @@ Frontend
 http://localhost:5173
 ```
 
-Backend API
+Backend
 
 ```
 http://localhost:3001
 ```
 
-PostgreSQL
+Health Check
 
 ```
-Host: localhost
-Port: 5432
+http://localhost:3001/health
 ```
 
-## Stop Containers
+Stop containers
 
 ```bash
 docker compose down
 ```
 
-## Remove Containers and Volumes
+---
+
+# Running Without Docker
+
+## Prerequisites
+
+- Node.js (v20+)
+- PostgreSQL
+
+---
+
+## Clone Repository
 
 ```bash
-docker compose down -v
-```
+git clone https://github.com/jeevesh10/Task-Tracker-for-Goolluck-Consulting-LLP.git
 
-## Rebuild Containers
-
-```bash
-docker compose build --no-cache
-docker compose up
+cd Task-Tracker-for-Goolluck-Consulting-LLP
 ```
 
 ---
 
-# Running the Project Without Docker
+## Backend Setup
 
-## 1. Install PostgreSQL
-
-Download PostgreSQL:
-
-https://www.postgresql.org/download/windows/
-
-During installation:
-
-- Username: postgres
-- Port: 5432
-- Set your own password
-
----
-
-## 2. Create Database
-
-Using pgAdmin or psql:
-
-```sql
-CREATE DATABASE task_dashboard;
-```
-
----
-
-## 3. Configure Environment Variables
-
-Create a `.env` file inside the **backend** folder.
-
-Example:
-
-```env
-PORT=3001
-
-DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/task_dashboard"
-
-JWT_SECRET=your_secret_key
-```
-
-Replace `YOUR_PASSWORD` with your PostgreSQL password.
-
----
-
-## 4. Install Backend Dependencies
+Navigate to backend
 
 ```bash
 cd backend
+```
+
+Install dependencies
+
+```bash
 npm install
 ```
 
-Generate Prisma Client:
+Create `.env`
+
+```env
+DATABASE_URL="postgresql://postgres:password@localhost:5432/task_dashboard"
+
+JWT_SECRET="your-secret-key"
+
+JWT_EXPIRES_IN="24h"
+
+PORT=3001
+```
+
+Generate Prisma Client
 
 ```bash
 npx prisma generate
 ```
 
-Push Database Schema:
+Create Database Tables
 
 ```bash
 npx prisma db push
 ```
 
-(Optional) Seed Database:
+(Optional) Seed Sample Data
 
 ```bash
 npm run db:seed
 ```
 
-Run Backend:
+Run Backend
 
 ```bash
 npm run dev
 ```
 
-Backend runs on:
+Backend URL
 
 ```
 http://localhost:3001
@@ -211,22 +219,33 @@ http://localhost:3001
 
 ---
 
-## 5. Install Frontend Dependencies
+## Frontend Setup
 
-Open another terminal:
+Open another terminal
 
 ```bash
 cd frontend
+```
+
+Install dependencies
+
+```bash
 npm install
 ```
 
-Run Frontend:
+Create `.env`
+
+```env
+VITE_API_URL=http://localhost:3001
+```
+
+Run frontend
 
 ```bash
 npm run dev
 ```
 
-Frontend runs on:
+Frontend URL
 
 ```
 http://localhost:5173
@@ -234,169 +253,144 @@ http://localhost:5173
 
 ---
 
-# Useful Docker Commands
+# Docker Commands
 
-View running containers:
-
-```bash
-docker ps
-```
-
-View logs:
+Build
 
 ```bash
-docker compose logs
+docker compose build
 ```
 
-View backend logs:
+Build without cache
 
 ```bash
-docker compose logs backend
+docker compose build --no-cache
 ```
 
-View frontend logs:
+Run
 
 ```bash
-docker compose logs frontend
+docker compose up
 ```
 
-View database logs:
+Run in background
 
 ```bash
-docker compose logs postgres
+docker compose up -d
 ```
 
-Stop all containers:
+Stop
 
 ```bash
 docker compose down
 ```
 
-Remove containers and volumes:
+Remove volumes
 
 ```bash
 docker compose down -v
 ```
 
-Rebuild the project:
+View logs
 
 ```bash
-docker compose up --build
-```
-
----
-
-# Database Configuration
-
-Database Name
-
-```
-task_dashboard
-```
-
-Default Port
-
-```
-5432
+docker compose logs
 ```
 
 ---
 
 # Environment Variables
 
-Backend `.env`
+## Backend
 
 ```env
+DATABASE_URL=postgresql://postgres:password@localhost:5432/task_dashboard
+
+JWT_SECRET=your-secret-key
+
+JWT_EXPIRES_IN=24h
+
+PORT=3001
+```
+
+## Frontend
+
+```env
+VITE_API_URL=http://localhost:3001
+```
+
+---
+
+# Production Environment
+
+## Backend (.env)
+
+```env
+DATABASE_URL=<Neon PostgreSQL Connection String>
+
+JWT_SECRET=<Your Secret>
+
+JWT_EXPIRES_IN=24h
+
 PORT=3001
 
-DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/task_dashboard
+NODE_ENV=production
+```
 
-JWT_SECRET=your_secret_key
+## Frontend (.env)
+
+```env
+VITE_API_URL=https://task-tracker-for-goolluck-consulting-llp.onrender.com
 ```
 
 ---
 
-# Troubleshooting
+# API Health Check
 
-### Docker is not running
-
-Start Docker Desktop and ensure the Docker Engine is running.
-
----
-
-### WSL is not installed
-
-Run:
-
-```powershell
-wsl --install
+```
+GET /health
 ```
 
-Restart your computer after installation.
+Response
 
----
-
-### Port Already in Use
-
-Check which process is using the port:
-
-```bash
-netstat -ano | findstr :3001
-```
-
-or
-
-```bash
-netstat -ano | findstr :5173
+```json
+{
+  "status": "ok"
+}
 ```
 
 ---
 
-### Prisma Errors
+# Deployment
 
-```bash
-npx prisma generate
-npx prisma db push
-```
+## Frontend
 
----
+Hosted on **Vercel**
 
-### Missing Dependencies
-
-Delete `node_modules` and reinstall dependencies.
-
-Windows CMD:
-
-```cmd
-rmdir /s /q node_modules
-npm install
-```
-
-Linux/macOS:
-
-```bash
-rm -rf node_modules
-npm install
-```
+https://task-tracker-for-goolluck-consultin.vercel.app
 
 ---
 
-# Features
+## Backend
 
-- JWT Authentication
-- Role-Based Access Control (Admin, Manager, Member)
-- User Management
-- Task Creation & Assignment
-- Task Status Updates
-- Comments
-- PostgreSQL Database
-- Prisma ORM
-- REST APIs
-- Responsive Dashboard
-- Docker Support
+Hosted on **Render**
+
+https://task-tracker-for-goolluck-consulting-llp.onrender.com
+
+---
+
+## Database
+
+Hosted on **Neon PostgreSQL**
+
+---
+
+# Repository
+
+https://github.com/jeevesh10/Task-Tracker-for-Goolluck-Consulting-LLP
 
 ---
 
 # License
 
-This project is intended for educational and assessment purposes.
+This project was developed as part of the **Goolluck Consulting LLP Full Stack Developer Internship Assignment**.
